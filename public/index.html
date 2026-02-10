@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="vi">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Tuyền & Trang 💕</title>
   <meta name="description" content="Tình yêu của hai chúng mình">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
   <div id="app">
 
@@ -240,14 +244,16 @@
                 <span class="avatar-initial">T</span>
               </div>
               <span class="avatar-label">Anh</span>
-              <input type="file" id="avatar1-input" accept="image/*" style="display:none;" onchange="handleAvatarUpload(1, this)">
+              <input type="file" id="avatar1-input" accept="image/*" style="display:none;"
+                onchange="handleAvatarUpload(1, this)">
             </div>
             <div class="avatar-editor">
               <div class="avatar avatar-edit" id="settings-avatar2" onclick="uploadAvatar(2)">
                 <span class="avatar-initial">T</span>
               </div>
               <span class="avatar-label">Em</span>
-              <input type="file" id="avatar2-input" accept="image/*" style="display:none;" onchange="handleAvatarUpload(2, this)">
+              <input type="file" id="avatar2-input" accept="image/*" style="display:none;"
+                onchange="handleAvatarUpload(2, this)">
             </div>
           </div>
           <label class="setting-label">Tên cặp đôi</label>
@@ -276,12 +282,18 @@
               </div>
             </div>
             <div class="color-presets">
-              <div class="preset" style="background:linear-gradient(135deg,#FF6B9D,#C06C84)" onclick="setPreset('#FF6B9D','#C06C84')"></div>
-              <div class="preset" style="background:linear-gradient(135deg,#ee9ca7,#ffdde1)" onclick="setPreset('#ee9ca7','#ffdde1')"></div>
-              <div class="preset" style="background:linear-gradient(135deg,#fc5c7d,#6a82fb)" onclick="setPreset('#fc5c7d','#6a82fb')"></div>
-              <div class="preset" style="background:linear-gradient(135deg,#f093fb,#f5576c)" onclick="setPreset('#f093fb','#f5576c')"></div>
-              <div class="preset" style="background:linear-gradient(135deg,#4facfe,#00f2fe)" onclick="setPreset('#4facfe','#00f2fe')"></div>
-              <div class="preset" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)" onclick="setPreset('#a18cd1','#fbc2eb')"></div>
+              <div class="preset" style="background:linear-gradient(135deg,#FF6B9D,#C06C84)"
+                onclick="setPreset('#FF6B9D','#C06C84')"></div>
+              <div class="preset" style="background:linear-gradient(135deg,#ee9ca7,#ffdde1)"
+                onclick="setPreset('#ee9ca7','#ffdde1')"></div>
+              <div class="preset" style="background:linear-gradient(135deg,#fc5c7d,#6a82fb)"
+                onclick="setPreset('#fc5c7d','#6a82fb')"></div>
+              <div class="preset" style="background:linear-gradient(135deg,#f093fb,#f5576c)"
+                onclick="setPreset('#f093fb','#f5576c')"></div>
+              <div class="preset" style="background:linear-gradient(135deg,#4facfe,#00f2fe)"
+                onclick="setPreset('#4facfe','#00f2fe')"></div>
+              <div class="preset" style="background:linear-gradient(135deg,#a18cd1,#fbc2eb)"
+                onclick="setPreset('#a18cd1','#fbc2eb')"></div>
             </div>
           </div>
           <div id="image-options" style="display:none;">
@@ -297,23 +309,28 @@
           <h3>✨ Hiệu ứng</h3>
           <div class="setting-row">
             <span>Cường độ: <strong id="intensity-val">5</strong>/10</span>
-            <input type="range" id="settings-intensity" min="1" max="10" value="5" class="slider" oninput="document.getElementById('intensity-val').textContent=this.value">
+            <input type="range" id="settings-intensity" min="1" max="10" value="5" class="slider"
+              oninput="document.getElementById('intensity-val').textContent=this.value">
           </div>
           <div class="setting-row">
             <span>💖 Trái tim bay</span>
-            <label class="switch"><input type="checkbox" id="enable-hearts" checked><span class="slider-toggle"></span></label>
+            <label class="switch"><input type="checkbox" id="enable-hearts" checked><span
+                class="slider-toggle"></span></label>
           </div>
           <div class="setting-row">
             <span>✨ Hạt sáng</span>
-            <label class="switch"><input type="checkbox" id="enable-particles" checked><span class="slider-toggle"></span></label>
+            <label class="switch"><input type="checkbox" id="enable-particles" checked><span
+                class="slider-toggle"></span></label>
           </div>
           <div class="setting-row">
             <span>🌈 Gradient động</span>
-            <label class="switch"><input type="checkbox" id="enable-gradient" checked><span class="slider-toggle"></span></label>
+            <label class="switch"><input type="checkbox" id="enable-gradient" checked><span
+                class="slider-toggle"></span></label>
           </div>
           <div class="setting-row">
             <span>🌊 Parallax</span>
-            <label class="switch"><input type="checkbox" id="enable-parallax" checked><span class="slider-toggle"></span></label>
+            <label class="switch"><input type="checkbox" id="enable-parallax" checked><span
+                class="slider-toggle"></span></label>
           </div>
         </div>
 
@@ -384,6 +401,16 @@
 
           <input type="text" id="music-title" class="setting-input" placeholder="Tên bài hát *">
           <input type="text" id="music-artist" class="setting-input" placeholder="Nghệ sĩ">
+
+          <!-- Upload Progress -->
+          <div id="upload-progress" style="display:none; margin: 20px 0;">
+            <div style="background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; height: 8px;">
+              <div id="upload-progress-bar"
+                style="background: var(--primary); height: 100%; width: 0%; transition: width 0.3s;"></div>
+            </div>
+            <p id="upload-status" style="text-align: center; margin-top: 8px; font-size: 0.9rem; opacity: 0.8;"></p>
+          </div>
+
           <div class="owner-select">
             <button class="owner-btn active" data-owner="tuyen" onclick="selectOwner('tuyen')">💙 Album Anh</button>
             <button class="owner-btn" data-owner="trang" onclick="selectOwner('trang')">💗 Album Em</button>
@@ -405,7 +432,9 @@
     </div>
   </div>
 
-  <audio id="audio-element"></audio>
+  <audio id="audio-element" playsinline preload="metadata"></audio>
   <script src="/js/app.js"></script>
 </body>
+
 </html>
+```
