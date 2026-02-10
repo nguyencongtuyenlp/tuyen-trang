@@ -161,24 +161,29 @@ app.post('/api/music', upload.fields([
     { name: 'audio', maxCount: 1 },
     { name: 'cover', maxCount: 1 }
 ]), (req, res) => {
-    const songs = readJSON('music.json');
-    const files = req.files || {};
-    const audioFile = files.audio?.[0];
-    const coverFile = files.cover?.[0];
+    try {
+        const songs = readJSON('music.json');
+        const files = req.files || {};
+        const audioFile = files.audio?.[0];
+        const coverFile = files.cover?.[0];
 
-    const song = {
-        id: uuidv4(),
-        title: req.body.title || 'Untitled',
-        artist: req.body.artist || '',
-        owner: req.body.owner || 'tuyen',
-        url: req.body.url || '',
-        fileUrl: audioFile ? `/uploads/music/${audioFile.filename}` : '',
-        coverArtUrl: coverFile ? `/uploads/covers/${coverFile.filename}` : '',
-        createdAt: new Date().toISOString()
-    };
-    songs.push(song);
-    writeJSON('music.json', songs);
-    res.status(201).json(song);
+        const song = {
+            id: uuidv4(),
+            title: req.body.title || 'Untitled',
+            artist: req.body.artist || '',
+            owner: req.body.owner || 'tuyen',
+            url: req.body.url || '',
+            fileUrl: audioFile ? `/uploads/music/${audioFile.filename}` : '',
+            coverArtUrl: coverFile ? `/uploads/covers/${coverFile.filename}` : '',
+            createdAt: new Date().toISOString()
+        };
+        songs.push(song);
+        writeJSON('music.json', songs);
+        res.status(201).json(song);
+    } catch (e) {
+        console.error('Music upload error:', e);
+        res.status(500).json({ error: 'Failed to save song.' });
+    }
 });
 
 app.delete('/api/music/:id', (req, res) => {
@@ -217,7 +222,18 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+// --- Error Handling Middleware ---
+app.use((err, req, res, next) => {
+    console.error('SERVER ERROR:', err);
+    if (err instanceof multer.MulterError) {
+        if (err.code === 'LIMIT_FILE_SIZE') {
+            return res.status(400).json({ error: 'File quá lớn! Tối đa 50MB.' });
+        }
+        return res.status(400).json({ error: 'Lỗi upload file: ' + err.message });
+    }
+    res.status(500).json({ error: 'Internal Server Error: ' + err.message });
+});
+
 app.listen(PORT, () => {
-    console.log(`\n  💕 Ngày Yêu Thương đang chạy tại:`);
-    console.log(`  👉 http://localhost:${PORT}\n`);
+    console.log(`Server running at http://localhost:${PORT}`);
 });
