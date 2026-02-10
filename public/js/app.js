@@ -363,16 +363,24 @@ function switchMusicTab(owner) {
 // ==================== MEDIA SESSION API (iPhone Lock Screen) ====================
 function updateMediaSession() {
     if ('mediaSession' in navigator && currentSong) {
+        // Set metadata with full URL for artwork
+        const artworkUrl = currentSong.coverArtUrl
+            ? (currentSong.coverArtUrl.startsWith('http')
+                ? currentSong.coverArtUrl
+                : window.location.origin + currentSong.coverArtUrl)
+            : window.location.origin + '/default-cover.png';
+
         navigator.mediaSession.metadata = new MediaMetadata({
             title: currentSong.title || 'Untitled',
             artist: currentSong.artist || 'Unknown Artist',
             album: 'Ngày Yêu Thương',
             artwork: [
-                {
-                    src: currentSong.coverArtUrl || '/default-cover.png',
-                    sizes: '512x512',
-                    type: 'image/jpeg'
-                }
+                { src: artworkUrl, sizes: '96x96', type: 'image/jpeg' },
+                { src: artworkUrl, sizes: '128x128', type: 'image/jpeg' },
+                { src: artworkUrl, sizes: '192x192', type: 'image/jpeg' },
+                { src: artworkUrl, sizes: '256x256', type: 'image/jpeg' },
+                { src: artworkUrl, sizes: '384x384', type: 'image/jpeg' },
+                { src: artworkUrl, sizes: '512x512', type: 'image/jpeg' }
             ]
         });
 
@@ -381,12 +389,14 @@ function updateMediaSession() {
             audio.play();
             isPlaying = true;
             updatePlayerUI();
+            updateMediaSession();
         });
 
         navigator.mediaSession.setActionHandler('pause', () => {
             audio.pause();
             isPlaying = false;
             updatePlayerUI();
+            updateMediaSession();
         });
 
         navigator.mediaSession.setActionHandler('previoustrack', () => {
@@ -397,8 +407,34 @@ function updateMediaSession() {
             playerNext();
         });
 
-        // Update playback state
+        // Seek handlers for iPhone
+        navigator.mediaSession.setActionHandler('seekbackward', (details) => {
+            audio.currentTime = Math.max(audio.currentTime - (details.seekOffset || 10), 0);
+        });
+
+        navigator.mediaSession.setActionHandler('seekforward', (details) => {
+            audio.currentTime = Math.min(audio.currentTime + (details.seekOffset || 10), audio.duration);
+        });
+
+        navigator.mediaSession.setActionHandler('seekto', (details) => {
+            if (details.fastSeek && 'fastSeek' in audio) {
+                audio.fastSeek(details.seekTime);
+            } else {
+                audio.currentTime = details.seekTime;
+            }
+        });
+
+        // Update playback state and position
         navigator.mediaSession.playbackState = isPlaying ? 'playing' : 'paused';
+
+        // Update position state
+        if (audio.duration && !isNaN(audio.duration)) {
+            navigator.mediaSession.setPositionState({
+                duration: audio.duration,
+                playbackRate: audio.playbackRate,
+                position: audio.currentTime
+            });
+        }
     }
 }
 
