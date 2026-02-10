@@ -1,0 +1,7 @@
+node_modules/
+uploads/*.mp3
+uploads/*.jpg
+uploads/*.png
+uploads/*.jpeg
+.env
+*.log

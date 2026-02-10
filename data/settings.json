@@ -1,0 +1,16 @@
+{
+  "coupleName": "Tuyền & Trang",
+  "anniversaryDate": "2022-12-04",
+  "backgroundType": "gradient",
+  "gradientColor1": "#4facfe",
+  "gradientColor2": "#00f2fe",
+  "backgroundUrl": "",
+  "avatar1Url": "/uploads/avatars/8408966a-5733-4ae4-885e-4f4ca72a423a.jpg",
+  "avatar2Url": "/uploads/avatars/a9939e79-7940-4889-bb97-d6555d6c8bd6.jpg",
+  "enableHearts": true,
+  "enableParticles": true,
+  "enableGradient": true,
+  "enableParallax": true,
+  "animationIntensity": 5,
+  "themeColor": "#ff6b9d"
+}
